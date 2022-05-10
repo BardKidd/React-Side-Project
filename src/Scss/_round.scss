@@ -1,0 +1,17 @@
+.round {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid white;
+  box-shadow: 0 0 10px #c1c1c1;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  padding: 5px;
+  transition: 0.18s;
+  cursor: pointer;
+  margin: 0 auto;
+}
+.round:hover {
+  transition: 0.18s;
+  transform: scale(1.1);
+}

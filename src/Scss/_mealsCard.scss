@@ -1,0 +1,61 @@
+.meal {
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.card {
+  border-radius: 10px;
+  box-shadow: 0 0 10px #c1c1c1;
+  position: relative;
+  width: 400px;
+  height: 300px;
+  overflow: hidden;
+  margin: 0.5rem;
+}
+.card:hover {
+  box-shadow: 0 0 10px #979797;
+}
+.card_mark {
+  position: absolute;
+  top: 10%;
+  background-color: white;
+  padding: 0.2rem 1rem;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-weight: bold;
+}
+.card_main {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+}
+.card_body {
+  max-width: 100%;
+  height: 90%;
+}
+.card_body:hover {
+  cursor: pointer;
+}
+.card_footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 2px 1rem;
+  align-items: center;
+  background-color: white;
+}
+.card_footer svg {
+  cursor: pointer;
+  color: #c1c1c1;
+}
+.card_footer svg.active {
+  color: #fc575e;
+}
+.card_footer a {
+  color: black;
+  font-weight: bold;
+}
