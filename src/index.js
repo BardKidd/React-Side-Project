@@ -12,10 +12,11 @@ import FavoriteItem from "./Pages/MyFavorite";
 import NavBar from "./Components/NavBar";
 import { SEARCH_MEALS, GET_RANDOM_MEALS } from "./Global";
 
-function Home() {
+function Home(props) {
   const [mealsName, setMealsName] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [mealsData, setMealsData] = useState({});
+  const { location } = props;
   const handleSearchMeals = async (e) => {
     if (
       (e.target.tagName.toLowerCase() === "input" && e.key !== "Enter") ||
@@ -76,6 +77,7 @@ function Home() {
       />
       <Ingredients ingredients={ingredients} />
       <MealsShow
+        location={location}
         ingredients={ingredients}
         mealsData={mealsData}
         setMealsData={setMealsData}
@@ -88,12 +90,14 @@ function Favorite(props) {
   const [allFavorite, setAllFavorite] = useState(
     JSON.parse(localStorage.getItem("meals"))
   );
+  const { location } = props;
   const renderItem = allFavorite.map((item) => {
     return (
       <FavoriteItem
         key={item.id}
         allFavorite={allFavorite}
         setAllFavorite={setAllFavorite}
+        location={location}
         item={item}
       ></FavoriteItem>
     );
@@ -111,12 +115,8 @@ function App() {
     <Fragment>
       <NavBar></NavBar>
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/favorite">
-          <Favorite />
-        </Route>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/favorite" component={Favorite} />
       </Switch>
     </Fragment>
   );

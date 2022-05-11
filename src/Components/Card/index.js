@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid, regular } from "@fortawesome/fontawesome-svg-core/import.macro";
 const Card = (props) => {
-  const { mealsData, ingredients } = props;
+  const { mealsData, ingredients, location } = props;
   const myLoveMeals = JSON.parse(localStorage.getItem("meals")) || [];
   const [isLoved, setIsLoved] = useState(false);
   const isFirst = useRef(true);
@@ -38,6 +38,31 @@ const Card = (props) => {
     }
   }
 
+  function ShowLove() {
+    if (location.pathname !== "/favorite") {
+      return (
+        <Fragment>
+          <FontAwesomeIcon
+            style={{ display: isLoved ? "" : "none" }}
+            onClick={() => {
+              isFirst.current = false;
+              setIsLoved(false);
+            }}
+            icon={solid("heart")}
+          />
+          <FontAwesomeIcon
+            style={{ display: isLoved ? "none" : "" }}
+            onClick={() => {
+              isFirst.current = false;
+              setIsLoved(true);
+            }}
+            icon={regular("heart")}
+          />
+        </Fragment>
+      );
+    }
+  }
+
   return (
     <div className="card">
       <div className="card_main">
@@ -56,23 +81,7 @@ const Card = (props) => {
           >
             {mealsData.strMeal}
           </a>
-
-          <FontAwesomeIcon
-            style={{ display: isLoved ? "" : "none" }}
-            onClick={() => {
-              isFirst.current = false;
-              setIsLoved(false);
-            }}
-            icon={solid("heart")}
-          />
-          <FontAwesomeIcon
-            style={{ display: isLoved ? "none" : "" }}
-            onClick={() => {
-              isFirst.current = false;
-              setIsLoved(true);
-            }}
-            icon={regular("heart")}
-          />
+          {ShowLove()}
         </div>
       </div>
     </div>

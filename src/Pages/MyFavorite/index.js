@@ -3,7 +3,7 @@ import Card from "../../Components/Card";
 import { useEffect } from "react";
 const FavoriteItem = (props) => {
   const { ingredients, id } = props.item;
-  const { setAllFavorite, allFavorite } = props;
+  const { setAllFavorite, allFavorite, location } = props;
   const allIngredients = ingredients.map((item, index) => {
     return <Round key={index} item={item} />;
   });
@@ -26,62 +26,33 @@ const FavoriteItem = (props) => {
       }
     }
   }
+
   useEffect(() => {
     localStorage.setItem("meals", JSON.stringify(allFavorite));
   }, [allFavorite]);
 
   return (
     <li
-      style={{
-        width: "50%",
-        margin: "0 auto",
-        listStyle: "none",
-        backgroundColor: "white",
-        borderRadius: "5px",
-        borderBottom: "1px solid gray",
-        position: "relative",
-      }}
+      className="favoriteItem"
     >
       <button
         type="button"
-        style={{
-          position: "absolute",
-          right: -10,
-          top: -10,
-          width: "30px",
-          height: "30px",
-          borderRadius: "30px",
-          border: "none",
-          backgroundColor: "#f44336",
-          color: "#fafafa",
-          cursor: "pointer",
-          fontWeight: "bold",
-        }}
+        className="closeBtn"
         onClick={() => removeMyFavorite(id)}
       >
         X
       </button>
       <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-around",
-        }}
+        className="contentBox"
       >
-        <div style={{ flex: 1 }}>
-          <Card {...props.item} />
+        <div className="contentBox_Card">
+          <Card {...props.item} location={location} />
         </div>
         <div
-          style={{
-            display: "flex",
-            flex: 1,
-          }}
+          className="contentBox_IngredientsBox"
         >
           <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-            }}
+            className="contentBox_IngredientsBox_Rounds"
           >
             {allIngredients}
           </div>

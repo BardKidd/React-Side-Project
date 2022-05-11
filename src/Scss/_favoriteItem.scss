@@ -1,0 +1,39 @@
+.favoriteItem {
+  width: 50%;
+  margin: 0 auto;
+  list-style: none;
+  background-color: white;
+  border-radius: 5px;
+  border-bottom: 1px solid gray;
+  position: relative;
+}
+.closeBtn {
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  border:  none ;
+  background-color:  #f44336 ;
+  color:  #fafafa ;
+  cursor:  pointer ;
+  font-weight:  bold ;
+}
+
+.contentBox {
+  display:  flex ;
+  align-items:  center ;
+  justify-content:  space-around ;
+  &_Card {
+    flex: 1;
+  }
+  &_IngredientsBox {
+    display:  flex ;
+    flex: 1;
+    &_Rounds {
+      display:  flex ;
+      flex-wrap:  wrap ;
+    }
+  }
+}
