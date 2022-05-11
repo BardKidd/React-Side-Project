@@ -1,9 +1,11 @@
-import { Link,Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 const NavBar = () => {
   return (
     <div>
-      <Link to="/">首頁</Link>
-      <Link to="/favorite">我的最愛</Link>
+      <Link className="linkStyle" to="/">
+        首頁
+      </Link>
+      <Link className="linkStyle" to="/favorite">我的最愛</Link>
       <Redirect to="/"></Redirect>
     </div>
   );

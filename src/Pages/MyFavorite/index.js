@@ -27,7 +27,6 @@ const FavoriteItem = (props) => {
     }
   }
   useEffect(() => {
-    console.log("allFavorite", allFavorite);
     localStorage.setItem("meals", JSON.stringify(allFavorite));
   }, [allFavorite]);
 

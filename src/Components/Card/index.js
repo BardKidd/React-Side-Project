@@ -6,16 +6,6 @@ const Card = (props) => {
   const myLoveMeals = JSON.parse(localStorage.getItem("meals")) || [];
   const [isLoved, setIsLoved] = useState(false);
   const isFirst = useRef(true);
-  //   const first = useRef(true);
-  //   useEffect(() => {
-  //     if (!first.current) {
-  //       if (mealsData.isHearted) {
-  //         addMyFavorite(mealsData.idMeal);
-  //       } else {
-  //         removeMyFavorite(mealsData.idMeal);
-  //       }
-  //     }
-  //   }, [mealsData]);
 
   useEffect(() => {
     if (!isFirst.current) {
