@@ -16,6 +16,7 @@ function Home(props) {
   const [mealsName, setMealsName] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [mealsData, setMealsData] = useState({});
+  const [isLoved, setIsLoved] = useState(false);
   const { location } = props;
   const handleSearchMeals = async (e) => {
     if (
@@ -33,6 +34,15 @@ function Home(props) {
 
     if (data) {
       setMealsData(data);
+
+      const allMyLoves = JSON.parse(localStorage.getItem("meals"));
+
+      allMyLoves.some((item) => {
+        if (item.id === data.idMeal) {
+          setIsLoved(true);
+          return true;
+        }
+      });
     } else {
       alert("未搜尋到該食譜");
     }
@@ -64,6 +74,15 @@ function Home(props) {
       const data = res.meals[0];
 
       setMealsData(data);
+
+      const allMyLoves = JSON.parse(localStorage.getItem("meals"));
+
+      allMyLoves.some((item) => {
+        if (item.id === data.idMeal) {
+          setIsLoved(true);
+          return true;
+        }
+      });
     };
     getRandom();
   }, []);
@@ -77,6 +96,8 @@ function Home(props) {
       />
       <Ingredients ingredients={ingredients} />
       <MealsShow
+        isLoved={isLoved}
+        setIsLoved={setIsLoved}
         location={location}
         ingredients={ingredients}
         mealsData={mealsData}

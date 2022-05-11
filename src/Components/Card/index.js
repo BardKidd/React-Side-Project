@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef, Fragment } from "react";
+import React, { useEffect, useRef, Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid, regular } from "@fortawesome/fontawesome-svg-core/import.macro";
 const Card = (props) => {
-  const { mealsData, ingredients, location } = props;
+  const { mealsData, ingredients, location, isLoved, setIsLoved } = props;
   const myLoveMeals = JSON.parse(localStorage.getItem("meals")) || [];
-  const [isLoved, setIsLoved] = useState(false);
   const isFirst = useRef(true);
 
   useEffect(() => {
