@@ -2,51 +2,50 @@ import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { solid, regular } from "@fortawesome/fontawesome-svg-core/import.macro";
 const Card = (props) => {
-  const { mealsData, ingredients, setMealsData } = props;
-  //   const [isHearted, setIsHearted] = useState(false);
-  const mealsList = JSON.parse(localStorage.getItem("meals")) || [];
+  const { mealsData, ingredients } = props;
+  const myLoveMeals = JSON.parse(localStorage.getItem("meals")) || [];
+  const [isLoved, setIsLoved] = useState(false);
+  const isFirst = useRef(true);
+  //   const first = useRef(true);
+  //   useEffect(() => {
+  //     if (!first.current) {
+  //       if (mealsData.isHearted) {
+  //         addMyFavorite(mealsData.idMeal);
+  //       } else {
+  //         removeMyFavorite(mealsData.idMeal);
+  //       }
+  //     }
+  //   }, [mealsData]);
 
-  const first = useRef(true);
   useEffect(() => {
-    if (!first.current) {
-      if (mealsData.isHearted) {
-        addMyFavorite(mealsData.idMeal);
+    if (!isFirst.current) {
+      if (isLoved) {
+        addMyFavorite(mealsData);
       } else {
-        removeMyFavorite(mealsData.idMeal);
+        removeMyFavorite(mealsData);
       }
     }
-  }, [mealsData.isHearted]);
+  }, [isLoved]);
 
-//   useEffect(() => {
-//     mealsList.forEach((item) => {
-//       if (item.id !== mealsData.idMeal) return false;
-//       if (item.isHearted) {
-//         setMealsData({ ...item, isHearted: true });
-//       } else {
-//         setMealsData({ ...item, isHearted: false });
-//       }
-//     });
-//   }, []);
-
-  function addMyFavorite(id) {
+  function addMyFavorite(mealsData) {
     const meals = {
-      id,
+      id: mealsData.idMeal,
       ingredients,
-      isHearted: mealsData.isHearted,
       mealsData,
     };
-    mealsList.push(meals);
-    localStorage.setItem("meals", JSON.stringify(mealsList));
+    myLoveMeals.push(meals);
+    localStorage.setItem("meals", JSON.stringify(myLoveMeals));
   }
 
-  function removeMyFavorite(id) {
-    const rm = mealsList.find((item) => {
-      return item.id === id;
+  function removeMyFavorite(mealsData) {
+    const rm = myLoveMeals.find((item) => {
+      return item.id === mealsData.idMeal;
     });
-    const rmIndex = mealsList.indexOf(rm);
-    // setIsHearted(false);
-    mealsList.splice(rmIndex, 1);
-    localStorage.setItem("meals", JSON.stringify(mealsList));
+    if (rm) {
+      const rmIndex = myLoveMeals.indexOf(rm);
+      myLoveMeals.splice(rmIndex, 1);
+      localStorage.setItem("meals", JSON.stringify(myLoveMeals));
+    }
   }
 
   return (
@@ -69,18 +68,18 @@ const Card = (props) => {
           </a>
 
           <FontAwesomeIcon
-          style={{ display: mealsData.isHearted ? "" : "none" }}
+            style={{ display: isLoved ? "" : "none" }}
             onClick={() => {
-              first.current = false;
-              setMealsData({...mealsData, isHearted: false})
+              isFirst.current = false;
+              setIsLoved(false);
             }}
             icon={solid("heart")}
           />
           <FontAwesomeIcon
-          style={{ display: mealsData.isHearted ? "none" : "" }}
+            style={{ display: isLoved ? "none" : "" }}
             onClick={() => {
-              first.current = false;
-              setMealsData({...mealsData, isHearted: true})
+              isFirst.current = false;
+              setIsLoved(true);
             }}
             icon={regular("heart")}
           />

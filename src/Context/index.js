@@ -1,5 +1,7 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
-export const MyTotalFavorite = createContext(
-  JSON.parse(localStorage.getItem("meals"))
-);
+export const MyTotalFavorite = createContext(null);
+
+export const useMyFavorite = () => {
+  return useContext(MyTotalFavorite);
+};

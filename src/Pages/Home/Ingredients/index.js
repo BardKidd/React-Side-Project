@@ -6,9 +6,9 @@ const wheelFoods = (e) => {
 
   initNum += e.deltaY * -0.01;
   if (initNum > lastNum) {
-    e.target.scrollLeft -= 10;
+    e.target.scrollLeft -= 20;
   } else {
-    e.target.scrollLeft += 10;
+    e.target.scrollLeft += 20;
   }
 };
 
